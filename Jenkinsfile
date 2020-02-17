@@ -1,15 +1,38 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:6-alpine' 
-            args '-p 3000:3000' 
-        }
-    }
+         agent any
+         tools {nodejs "nodejs"}
+
     stages {
-        stage('Build') { 
+        stage("Code Checkout") {
             steps {
-                sh 'npm install -g' 
-            }
-        }
-    }
-}
+                git branch: 'master',
+                credentialsId: 'jenkins',
+                url: 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
+                  }
+              }
+         stage('Code Quality') {
+                   steps {
+                       script {
+                          def scannerHome = tool 'sonar-scanner';
+                          withSonarQubeEnv("sonarqube") {
+                          sh "${tool("sonar-scanner")}/bin/sonar-scanner"
+                                       }
+                               }
+                           }
+                        }
+
+         stage("Install Dependencies") {
+                                  steps {
+                                        sh "npm install"
+
+                                       }
+                                }
+
+        //  stage("unit Test") {
+        //                     steps {
+        //                         sh "npm test"
+
+        //                       }
+        //                 }
+             }
+     }
