@@ -13,6 +13,7 @@ pipeline {
          stage('Code Quality') {
                    steps {
                        script {
+                         //
                           def scannerHome = tool 'sonar-scanner';
                           withSonarQubeEnv("sonarqube") {
                           sh "${tool("sonar-scanner")}/bin/sonar-scanner"
@@ -20,12 +21,5 @@ pipeline {
                                }
                            }
                         }
-
-        //  stage("Install Dependencies") {
-        //                           steps {
-        //                                 sh "npm install"
-
-        //                                }
-        //                         }
              }
      }
