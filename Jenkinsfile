@@ -21,18 +21,11 @@ pipeline {
                            }
                         }
 
-         stage("Install Dependencies") {
-                                  steps {
-                                        sh "npm install"
+        //  stage("Install Dependencies") {
+        //                           steps {
+        //                                 sh "npm install"
 
-                                       }
-                                }
-
-        //  stage("unit Test") {
-        //                     steps {
-        //                         sh "npm test"
-
-        //                       }
-        //                 }
+        //                                }
+        //                         }
              }
      }
