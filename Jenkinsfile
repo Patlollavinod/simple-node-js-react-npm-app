@@ -1,4 +1,5 @@
-node {
+pipeline {
+    agent any
   stage('Checkout') {
     git 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
   }
