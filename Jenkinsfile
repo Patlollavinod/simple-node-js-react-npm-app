@@ -1,12 +1,29 @@
-node {
-  stage('SCM') {
-    git 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
-    sh sonar-scanner
-  }
-//   stage('SonarQube analysis') {
-//     def scannerHome = tool 'SonarScanner 4.0';
-//     withSonarQubeEnv('SonarQube') { // If you have configured more than one global server connection, you can specify its name
-//       sh "${scannerHome}/bin/sonar-scanner"
-//     }
-//   }
+pipeline {
+    agent any
+    stages {
+        stage('SCM') {
+            steps {
+                git url: 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
+            }
+        }
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'Maven 3.5') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                    // true = set pipeline to UNSTABLE, false = don't
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+    }
 }
