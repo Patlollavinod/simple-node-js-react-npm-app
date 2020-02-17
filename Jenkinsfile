@@ -6,7 +6,7 @@ pipeline {
         stage("Code Checkout") {
             steps {
                 git branch: 'master',
-                credentialsId: 'jenkins',
+                //credentialsId: 'jenkins',
                 url: 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
                   }
               }
