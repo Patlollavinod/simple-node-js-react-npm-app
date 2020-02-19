@@ -36,8 +36,7 @@ $ sonar-scanner –version
 #Configuring SonnarScanner in Jenkins
 
 1. Go to Manage Jenkins > Global Tool Configuration.
-![alt text](https://raw.githubusercontent.com/edsherwin/
-simple-node-js-react-npm-app/master/img/1.png)
+![alt text](https://github.com/edsherwin/simple-node-js-react-npm-app/blob/master/img/1.png)
 2. Find SonarQube Scanner and click on SonarQube Scanner.
 3. Input any Name and the path of sonar scanner.
 4. Unselect the Install automatically.
