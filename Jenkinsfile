@@ -7,7 +7,7 @@ pipeline {
         stage("Code Checkout") {
             steps {
                 git branch: 'master',
-                //credentialsId: 'jenkins',
+                //The repository containing the sonar-project.properties
                 url: 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
                   }
               }
@@ -16,9 +16,10 @@ pipeline {
                        script {
                          //
                          sh "pwd"
+                         //This will call the sonar-scanner installed in the Jenkins, then it will used the sonar-project.properties configuration on the directory(workspace)
                          sh "/opt/sonar-scanner/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
                                        }
                                }
                            }
-                        }
-             }
+            }
+}
