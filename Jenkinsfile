@@ -1,29 +1,25 @@
 pipeline {
-    agent any
+         agent any
+         //tools {nodejs "nodejs"}
+         //f15275d15d373a3944edc01ebe4760951321d917
+
     stages {
-        stage('SCM') {
+        stage("Code Checkout") {
             steps {
-                git url: 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
-            }
-        }
-        stage('build && SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('sonarqube') {
-                    // Optionally use a Maven environment you've configured already
-                    //withMaven(maven:'Maven 3.5') {
-                      //  sh 'mvn clean package sonar:sonar'
-                    }
-                }
-            }
-        }
-        stage("Quality Gate") {
-            steps {
-                timeout(time: 1, unit: 'HOURS') {
-                    // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                    // true = set pipeline to UNSTABLE, false = don't
-                    waitForQualityGate abortPipeline: true
-                }
-            }
-        }
-    }
-}
+                git branch: 'master',
+                //credentialsId: 'jenkins',
+                url: 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
+                  }
+              }
+         stage('Code Quality') {
+                   steps {
+                       script {
+                         //
+                         sh "pwd"
+                         sh "/opt/sonar-scanner/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+                                       }
+                               }
+                           }
+                        }
+             }
+     }
