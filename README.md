@@ -41,9 +41,20 @@ $ sonar-scanner –version
 2. Find SonarQube Scanner and click on SonarQube Scanner.
 3. Input any Name and the path of sonar scanner.
 4. Unselect the Install automatically.
+![alt text](https://github.com/edsherwin/simple-node-js-react-npm-app/blob/master/img/2.png)
+5. Then, Save configurations.
 
-# How to create a pipeline in Jenkins
+# Creating a declarative Pipeline Job Project
 
-1. Go to Jenkins server: http://localhost:8080
-2. N
+1. Go to Jenkins > New Item > Pipeline.
+2. Input any name for your Job
+3. Input the details below on the configuration.
+![alt text](https://github.com/edsherwin/simple-node-js-react-npm-app/blob/master/img/3.png)
+- Definition: Pipeline script from SCM
+- SCM: Git
+- Repostiries: Git URL and Git Credentials
+- Branches to Build: */master ("depends on your preference")
+- Script Path: Jenkinsfile
+
+
 
