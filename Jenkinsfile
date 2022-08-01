@@ -8,7 +8,7 @@ pipeline {
             steps {
                 git branch: 'master',
                 //The repository containing the sonar-project.properties
-                url: 'https://github.com/edsherwin/simple-node-js-react-npm-app.git'
+                url: 'https://github.com/Patlollavinod/simple-node-js-react-npm-app.git'
                   }
               }
          stage('Code Quality') {
